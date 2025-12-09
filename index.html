@@ -7,6 +7,64 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div class="wrapper">
+      <h1>Алгоритм дискретного логарифма "Шаг младенца, шаг великана"</h1>
+
+      <main>
+        <form id="form">
+          <div class="field">
+            <label for="pValue">p = <input type="text" name="pValue" /></label>
+          </div>
+
+          <div class="field">
+            <label for="gValue">g = <input type="text" name="gValue" /></label>
+          </div>
+
+          <div class="field">
+            <label for="aValue">a = <input type="text" name="aValue" /></label>
+          </div>
+
+          <div class="field"><div name="nValue">n =</div></div>
+
+          <button type="submit">Решить</button>
+        </form>
+        <section>
+          <h2>
+            Шаг 1. Вычислить m = [
+            <math>
+              <msqrt>
+                <mi>p</mi>
+              </msqrt>
+            </math>
+            ] + 1.
+          </h2>
+          <div class="section-output"></div>
+        </section>
+        <section>
+          <h2>Шаг 2. Вычислить b = g<sup>m</sup>.</h2>
+          <div class="section-output"></div>
+        </section>
+        <section>
+          <h2>
+            Шаг 3. Вычислить последовательности u<sub>i</sub> = b<sup>i</sup>,
+            v<sub>j</sub> = a * g<sup>j</sup>. Для i, j = 1, ..., m.
+          </h2>
+          <div class="section-output"></div>
+        </section>
+        <section>
+          <h2>
+            Шаг 4. Найти i, j Такие что u<sub>i</sub> = v<sub>j</sub> => x = m *
+            i - j mod n.
+          </h2>
+          <div class="section-output"></div>
+        </section>
+        <section>
+          <h2>Вывод: log<sub>g</sub>a = x.</h2>
+          <div class="section-output"></div>
+        </section>
+      </main>
+    </div>
+
     <script src="./main.js" type="module"></script>
   </body>
 </html>
