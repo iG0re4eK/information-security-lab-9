@@ -36,7 +36,7 @@ main {
 }
 
 #form {
-  width: 400px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -48,7 +48,7 @@ main {
   }
 
   input {
-    width: 90%;
+    max-width: 90%;
     height: 1.5rem;
     border-radius: 1rem;
     padding: 0 1rem;
