@@ -1,5 +1,17 @@
+import { RobinMiller } from "./robinMiller.js";
+
 const form = document.getElementById("form");
 const sectionOutputs = document.querySelectorAll(".section-output");
+const robinMillerMethod = new RobinMiller();
+const startPageBtn = document.getElementById("startPageBtn");
+
+startPageBtn.addEventListener("click", () => {
+  clearErrors();
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
 
 function validInput(value) {
   if (value === null || value === undefined) {
@@ -86,13 +98,35 @@ form.addEventListener("submit", (e) => {
 
   if (hasError) return;
 
-  if (a >= p) {
-    showError(form.querySelector('[name="aValue"]'), "a должно быть меньше p");
+  if (!robinMillerMethod.robinMiller(p)) {
+    showError(
+      form.querySelector('[name="pValue"]'),
+      "Должно быть простым числом"
+    );
     return;
   }
 
-  if (g >= p) {
-    showError(form.querySelector('[name="gValue"]'), "g должно быть меньше p");
+  if (g <= 0 || g >= p) {
+    showError(
+      form.querySelector('[name="gValue"]'),
+      `g должно быть в диапазоне: 1 < g < ${p}`
+    );
+    return;
+  }
+
+  if (a <= 0 || a >= p) {
+    showError(
+      form.querySelector('[name="aValue"]'),
+      `a должно быть в диапазоне: 0 < a < ${p}`
+    );
+    return;
+  }
+
+  if (!isGenerator(g, p)) {
+    showError(
+      form.querySelector('[name="gValue"]'),
+      `Может не быть генератором для ${p}`
+    );
     return;
   }
 
@@ -104,6 +138,22 @@ form.addEventListener("submit", (e) => {
   clearErrors();
   init(p, g, a, n);
 });
+
+function isGenerator(g, p) {
+  const n = p - 1;
+
+  if (sumMod(g, n, p) !== 1) return false;
+
+  for (let i = 2; i * i <= n; i++) {
+    if (n % i === 0) {
+      if (sumMod(g, i, p) === 1 || sumMod(g, n / i, p) === 1) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 function showError(input, message) {
   input.classList.add("error");
 
