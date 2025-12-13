@@ -199,7 +199,7 @@ function sumMod(a, x, n) {
 }
 
 function step1(p) {
-  const m = Math.round(Math.sqrt(p)) + 1;
+  const m = Math.trunc(Math.sqrt(p)) + 1;
 
   return { m: m, sqrt: Math.sqrt(p), round: Math.round(Math.sqrt(p)) };
 }
